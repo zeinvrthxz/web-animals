@@ -1,0 +1,3220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animalia 🐾 - Dunia Hewan Lucu</title>
+
+<style>
+/* =========================================================
+   ANIMALIA - SUPER CUTE ANIMAL WEBSITE
+   HTML + CSS + JAVASCRIPT DALAM 1 FILE
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --pink:#ff7eb6;
+    --pink-dark:#ff4f98;
+    --purple:#9b7cff;
+    --blue:#6bc9ff;
+    --cyan:#61e8e1;
+    --yellow:#ffd86b;
+    --green:#83df9b;
+    --orange:#ffae6b;
+    --red:#ff7070;
+    --white:#ffffff;
+    --cream:#fffafc;
+    --text:#413c52;
+    --muted:#8c8798;
+    --card:#ffffff;
+    --shadow:0 20px 50px rgba(74,55,91,.12);
+    --shadow-small:0 10px 25px rgba(74,55,91,.09);
+    --radius:28px;
+    --transition:.35s ease;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 10%,rgba(255,126,182,.12),transparent 25%),
+        radial-gradient(circle at 90% 20%,rgba(107,201,255,.13),transparent 25%),
+        radial-gradient(circle at 50% 90%,rgba(155,124,255,.10),transparent 30%),
+        #fffafd;
+    overflow-x:hidden;
+    transition:background .4s ease,color .4s ease;
+}
+
+body.dark{
+    --cream:#171520;
+    --white:#211d2c;
+    --card:#211d2c;
+    --text:#f6f1fa;
+    --muted:#aaa2b7;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(255,126,182,.08),transparent 25%),
+        radial-gradient(circle at 90% 20%,rgba(107,201,255,.08),transparent 25%),
+        #15131d;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+/* =========================================================
+   FLOATING BACKGROUND
+========================================================= */
+
+.background-shape{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-2;
+    filter:blur(1px);
+}
+
+.shape-one{
+    width:180px;
+    height:180px;
+    background:rgba(255,126,182,.13);
+    top:15%;
+    left:-80px;
+    animation:floatShape 8s infinite ease-in-out;
+}
+
+.shape-two{
+    width:250px;
+    height:250px;
+    background:rgba(107,201,255,.10);
+    right:-100px;
+    top:40%;
+    animation:floatShape 10s infinite ease-in-out reverse;
+}
+
+.shape-three{
+    width:140px;
+    height:140px;
+    background:rgba(255,216,107,.12);
+    left:40%;
+    bottom:5%;
+    animation:floatShape 7s infinite ease-in-out;
+}
+
+@keyframes floatShape{
+    0%,100%{
+        transform:translateY(0) rotate(0);
+    }
+    50%{
+        transform:translateY(-30px) rotate(15deg);
+    }
+}
+
+/* =========================================================
+   PAW DECORATION
+========================================================= */
+
+.paw{
+    position:fixed;
+    font-size:28px;
+    opacity:.12;
+    pointer-events:none;
+    z-index:-1;
+    animation:pawFloat 12s linear infinite;
+}
+
+.paw.p1{left:5%;top:30%;animation-delay:0s}
+.paw.p2{left:15%;top:75%;animation-delay:2s}
+.paw.p3{right:7%;top:25%;animation-delay:4s}
+.paw.p4{right:18%;top:70%;animation-delay:6s}
+.paw.p5{left:48%;top:20%;animation-delay:8s}
+
+@keyframes pawFloat{
+    0%{
+        transform:translateY(40px) rotate(-20deg);
+        opacity:0;
+    }
+    20%{
+        opacity:.13;
+    }
+    80%{
+        opacity:.13;
+    }
+    100%{
+        transform:translateY(-120px) rotate(25deg);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    width:100%;
+    padding:16px 5%;
+    backdrop-filter:blur(18px);
+    background:rgba(255,250,252,.82);
+    border-bottom:1px solid rgba(255,126,182,.12);
+}
+
+.dark .navbar{
+    background:rgba(21,19,29,.82);
+}
+
+.nav-container{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Baloo 2',cursive;
+    font-size:27px;
+    font-weight:800;
+    color:var(--pink-dark);
+}
+
+.logo-icon{
+    width:46px;
+    height:46px;
+    border-radius:16px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,#ff8fbe,#9b7cff);
+    color:white;
+    box-shadow:0 8px 20px rgba(255,79,152,.25);
+    animation:logoBounce 3s infinite ease-in-out;
+}
+
+@keyframes logoBounce{
+    0%,100%{transform:rotate(-4deg)}
+    50%{transform:rotate(4deg) translateY(-4px)}
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.nav-links a{
+    padding:10px 15px;
+    border-radius:14px;
+    font-size:14px;
+    font-weight:600;
+    transition:var(--transition);
+}
+
+.nav-links a:hover{
+    background:#fff0f7;
+    color:var(--pink-dark);
+    transform:translateY(-2px);
+}
+
+.dark .nav-links a:hover{
+    background:#302839;
+}
+
+.nav-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:43px;
+    height:43px;
+    border-radius:14px;
+    background:var(--white);
+    box-shadow:var(--shadow-small);
+    font-size:18px;
+    transition:var(--transition);
+}
+
+.icon-btn:hover{
+    transform:translateY(-3px) rotate(5deg);
+}
+
+.menu-btn{
+    display:none;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    max-width:1250px;
+    margin:auto;
+    min-height:650px;
+    padding:70px 5% 60px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:50px;
+}
+
+.hero-content{
+    position:relative;
+}
+
+.mini-label{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#fff0f7;
+    color:var(--pink-dark);
+    padding:10px 17px;
+    border-radius:100px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:20px;
+    box-shadow:0 8px 20px rgba(255,126,182,.10);
+}
+
+.dark .mini-label{
+    background:#302432;
+}
+
+.hero h1{
+    font-family:'Baloo 2',cursive;
+    font-size:clamp(48px,7vw,88px);
+    line-height:.92;
+    letter-spacing:-3px;
+    margin-bottom:24px;
+}
+
+.hero h1 span{
+    color:var(--pink-dark);
+}
+
+.hero h1 .blue{
+    color:#65bff2;
+}
+
+.hero-text{
+    max-width:570px;
+    color:var(--muted);
+    line-height:1.9;
+    font-size:16px;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.primary-btn{
+    padding:15px 23px;
+    border-radius:17px;
+    background:linear-gradient(135deg,#ff7eb6,#9b7cff);
+    color:white;
+    font-weight:700;
+    box-shadow:0 12px 25px rgba(155,124,255,.22);
+    transition:var(--transition);
+}
+
+.primary-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 17px 30px rgba(155,124,255,.3);
+}
+
+.secondary-btn{
+    padding:15px 23px;
+    border-radius:17px;
+    background:var(--white);
+    color:var(--text);
+    font-weight:700;
+    box-shadow:var(--shadow-small);
+    transition:var(--transition);
+}
+
+.secondary-btn:hover{
+    transform:translateY(-4px);
+}
+
+.hero-stats{
+    display:flex;
+    gap:28px;
+    margin-top:35px;
+}
+
+.stat strong{
+    display:block;
+    font-family:'Baloo 2',cursive;
+    font-size:28px;
+}
+
+.stat span{
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* =========================================================
+   HERO ANIMAL
+========================================================= */
+
+.hero-animal{
+    position:relative;
+    height:510px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-circle{
+    width:min(450px,90vw);
+    height:min(450px,90vw);
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 30% 25%,#ffffff,transparent 18%),
+        linear-gradient(145deg,#ffe4ef,#dfe7ff);
+    position:relative;
+    box-shadow:
+        0 35px 70px rgba(117,96,145,.18),
+        inset 0 -20px 50px rgba(255,255,255,.6);
+    animation:heroFloat 5s ease-in-out infinite;
+}
+
+.dark .hero-circle{
+    background:linear-gradient(145deg,#392d42,#292b47);
+}
+
+@keyframes heroFloat{
+    0%,100%{
+        transform:translateY(0) rotate(0);
+    }
+    50%{
+        transform:translateY(-14px) rotate(2deg);
+    }
+}
+
+.hero-img{
+    position:absolute;
+    width:90%;
+    height:90%;
+    object-fit:cover;
+    border-radius:50%;
+    padding:12px;
+    filter:saturate(1.05);
+}
+
+.floating-card{
+    position:absolute;
+    background:var(--white);
+    padding:14px 18px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    font-weight:700;
+    animation:floatCard 4s infinite ease-in-out;
+}
+
+.card-a{
+    top:15%;
+    left:0;
+}
+
+.card-b{
+    bottom:18%;
+    right:-5%;
+    animation-delay:1.5s;
+}
+
+@keyframes floatCard{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+    max-width:1250px;
+    margin:auto;
+    padding:85px 5%;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-tag{
+    display:inline-block;
+    color:var(--pink-dark);
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.section-heading h2{
+    font-family:'Baloo 2',cursive;
+    font-size:48px;
+    line-height:1;
+    margin-bottom:13px;
+}
+
+.section-heading p{
+    max-width:650px;
+    margin:auto;
+    color:var(--muted);
+    line-height:1.8;
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box{
+    max-width:700px;
+    margin:0 auto 35px;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    border:2px solid transparent;
+    outline:none;
+    background:var(--white);
+    color:var(--text);
+    padding:18px 55px 18px 22px;
+    border-radius:20px;
+    box-shadow:var(--shadow-small);
+    transition:var(--transition);
+}
+
+.search-box input:focus{
+    border-color:#ffafd0;
+    box-shadow:0 15px 35px rgba(255,126,182,.12);
+}
+
+.search-icon{
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filters{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-bottom:35px;
+}
+
+.filter-btn{
+    padding:10px 17px;
+    border-radius:100px;
+    background:var(--white);
+    color:var(--muted);
+    box-shadow:var(--shadow-small);
+    font-size:13px;
+    font-weight:700;
+    transition:var(--transition);
+}
+
+.filter-btn:hover,
+.filter-btn.active{
+    background:var(--pink-dark);
+    color:white;
+    transform:translateY(-2px);
+}
+
+/* =========================================================
+   ANIMAL GRID
+========================================================= */
+
+.animal-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.animal-card{
+    background:var(--card);
+    border-radius:25px;
+    padding:10px;
+    box-shadow:var(--shadow-small);
+    transition:var(--transition);
+    position:relative;
+    overflow:hidden;
+}
+
+.animal-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 50px rgba(74,55,91,.16);
+}
+
+.animal-image-wrap{
+    height:220px;
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+}
+
+.animal-image{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s ease;
+}
+
+.animal-card:hover .animal-image{
+    transform:scale(1.08);
+}
+
+.favorite{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:rgba(255,255,255,.9);
+    display:grid;
+    place-items:center;
+    font-size:18px;
+    z-index:2;
+    transition:var(--transition);
+}
+
+.favorite:hover{
+    transform:scale(1.15);
+}
+
+.favorite.liked{
+    color:#ff4f79;
+}
+
+.animal-info{
+    padding:17px 10px 10px;
+}
+
+.animal-info h3{
+    font-family:'Baloo 2',cursive;
+    font-size:24px;
+    line-height:1;
+    margin-bottom:7px;
+}
+
+.animal-info p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
+}
+
+.animal-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:13px;
+}
+
+.animal-type{
+    font-size:11px;
+    font-weight:700;
+    padding:6px 10px;
+    border-radius:100px;
+    background:#fff0f7;
+    color:var(--pink-dark);
+}
+
+.dark .animal-type{
+    background:#332430;
+}
+
+.detail-btn{
+    background:none;
+    color:var(--purple);
+    font-size:12px;
+    font-weight:800;
+}
+
+/* =========================================================
+   FEATURE BANNER
+========================================================= */
+
+.feature-banner{
+    max-width:1150px;
+    margin:30px auto 80px;
+    padding:50px;
+    border-radius:35px;
+    background:
+        radial-gradient(circle at 90% 20%,rgba(255,255,255,.3),transparent 20%),
+        linear-gradient(135deg,#ff83b9,#9a7cff);
+    color:white;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 25px 55px rgba(155,124,255,.23);
+}
+
+.feature-banner::before{
+    content:'🐾';
+    position:absolute;
+    font-size:180px;
+    right:20px;
+    bottom:-55px;
+    opacity:.12;
+    transform:rotate(-15deg);
+}
+
+.feature-banner h2{
+    font-family:'Baloo 2',cursive;
+    font-size:45px;
+    line-height:1;
+    margin-bottom:15px;
+}
+
+.feature-banner p{
+    max-width:600px;
+    line-height:1.8;
+    opacity:.9;
+}
+
+.feature-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:25px;
+}
+
+.white-btn{
+    background:white;
+    color:#8d69dd;
+    padding:13px 20px;
+    border-radius:15px;
+    font-weight:800;
+}
+
+/* =========================================================
+   FACTS
+========================================================= */
+
+.fact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.fact-card{
+    background:var(--white);
+    padding:28px;
+    border-radius:25px;
+    box-shadow:var(--shadow-small);
+    transition:var(--transition);
+}
+
+.fact-card:hover{
+    transform:translateY(-7px);
+}
+
+.fact-icon{
+    width:55px;
+    height:55px;
+    display:grid;
+    place-items:center;
+    border-radius:18px;
+    font-size:27px;
+    margin-bottom:20px;
+}
+
+.fact-card:nth-child(1) .fact-icon{
+    background:#ffe4ef;
+}
+
+.fact-card:nth-child(2) .fact-icon{
+    background:#e2f5ff;
+}
+
+.fact-card:nth-child(3) .fact-icon{
+    background:#fff2cf;
+}
+
+.fact-card h3{
+    font-family:'Baloo 2',cursive;
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.fact-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.8;
+}
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+.quiz-section{
+    background:linear-gradient(135deg,#fff0f7,#f0edff);
+    max-width:none;
+}
+
+.dark .quiz-section{
+    background:linear-gradient(135deg,#251c28,#211e32);
+}
+
+.quiz-box{
+    max-width:800px;
+    margin:auto;
+    background:var(--white);
+    padding:35px;
+    border-radius:30px;
+    box-shadow:var(--shadow);
+    text-align:center;
+}
+
+.quiz-progress{
+    height:9px;
+    background:#eee8f1;
+    border-radius:100px;
+    overflow:hidden;
+    margin-bottom:25px;
+}
+
+.quiz-progress-bar{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#ff7eb6,#9b7cff);
+    transition:.4s;
+}
+
+.quiz-question{
+    font-family:'Baloo 2',cursive;
+    font-size:30px;
+    margin-bottom:25px;
+}
+
+.quiz-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.quiz-option{
+    padding:15px;
+    border-radius:17px;
+    background:#faf7fc;
+    color:var(--text);
+    font-weight:700;
+    transition:var(--transition);
+}
+
+.dark .quiz-option{
+    background:#302b39;
+}
+
+.quiz-option:hover{
+    background:#ffe7f1;
+    transform:translateY(-3px);
+}
+
+.quiz-result{
+    display:none;
+}
+
+.quiz-score{
+    font-family:'Baloo 2',cursive;
+    font-size:60px;
+    color:var(--pink-dark);
+}
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    grid-auto-rows:100px;
+    gap:14px;
+}
+
+.gallery-item{
+    overflow:hidden;
+    border-radius:22px;
+    position:relative;
+    box-shadow:var(--shadow-small);
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.1) rotate(1deg);
+}
+
+.gallery-item:nth-child(1){
+    grid-column:span 5;
+    grid-row:span 3;
+}
+
+.gallery-item:nth-child(2){
+    grid-column:span 3;
+    grid-row:span 2;
+}
+
+.gallery-item:nth-child(3){
+    grid-column:span 4;
+    grid-row:span 2;
+}
+
+.gallery-item:nth-child(4){
+    grid-column:span 3;
+    grid-row:span 3;
+}
+
+.gallery-item:nth-child(5){
+    grid-column:span 4;
+    grid-row:span 2;
+}
+
+.gallery-item:nth-child(6){
+    grid-column:span 5;
+    grid-row:span 2;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta{
+    text-align:center;
+    padding:100px 5%;
+}
+
+.cta-box{
+    max-width:900px;
+    margin:auto;
+    background:var(--white);
+    padding:60px 30px;
+    border-radius:35px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+}
+
+.cta-box::before,
+.cta-box::after{
+    content:'';
+    position:absolute;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    opacity:.3;
+}
+
+.cta-box::before{
+    background:#ffb1d2;
+    left:-30px;
+    top:-30px;
+}
+
+.cta-box::after{
+    background:#a99aff;
+    right:-30px;
+    bottom:-30px;
+}
+
+.cta h2{
+    font-family:'Baloo 2',cursive;
+    font-size:50px;
+    line-height:1;
+    margin-bottom:15px;
+}
+
+.cta p{
+    color:var(--muted);
+    margin-bottom:25px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:50px 5%;
+    background:#292432;
+    color:white;
+}
+
+.footer-container{
+    max-width:1150px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-logo{
+    font-family:'Baloo 2',cursive;
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.footer-text{
+    color:#bbb3c5;
+    max-width:400px;
+    line-height:1.8;
+    font-size:13px;
+}
+
+.footer-column h4{
+    margin-bottom:15px;
+}
+
+.footer-column a{
+    display:block;
+    color:#bbb3c5;
+    font-size:13px;
+    margin:9px 0;
+    transition:.3s;
+}
+
+.footer-column a:hover{
+    color:#ff8fbe;
+    transform:translateX(4px);
+}
+
+.copyright{
+    max-width:1150px;
+    margin:40px auto 0;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.1);
+    color:#938a9e;
+    font-size:12px;
+    text-align:center;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(30,20,40,.65);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:3000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+    animation:fadeIn .3s;
+}
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+.modal-content{
+    width:min(850px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:var(--white);
+    border-radius:30px;
+    padding:15px;
+    position:relative;
+    animation:modalUp .4s;
+}
+
+@keyframes modalUp{
+    from{
+        transform:translateY(40px) scale(.95);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+}
+
+.close-modal{
+    position:absolute;
+    top:25px;
+    right:25px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:rgba(255,255,255,.9);
+    z-index:3;
+    font-size:20px;
+}
+
+.modal-image{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+    border-radius:22px;
+}
+
+.modal-info{
+    padding:25px;
+}
+
+.modal-info h2{
+    font-family:'Baloo 2',cursive;
+    font-size:42px;
+}
+
+.modal-info p{
+    color:var(--muted);
+    line-height:1.9;
+    margin-top:10px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#292432;
+    color:white;
+    padding:15px 20px;
+    border-radius:17px;
+    box-shadow:var(--shadow);
+    transform:translateY(120px);
+    opacity:0;
+    transition:.4s;
+    z-index:4000;
+    font-size:13px;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================================================
+   SCROLL TOP
+========================================================= */
+
+.scroll-top{
+    position:fixed;
+    bottom:25px;
+    left:25px;
+    width:45px;
+    height:45px;
+    border-radius:15px;
+    background:var(--pink-dark);
+    color:white;
+    box-shadow:var(--shadow);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:900;
+}
+
+.scroll-top.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1000px){
+    .animal-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero-content{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .hero-text{
+        max-width:700px;
+    }
+
+    .hero-animal{
+        order:-1;
+        height:430px;
+    }
+
+    .hero-circle{
+        width:360px;
+        height:360px;
+    }
+
+    .footer-container{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:760px){
+    .nav-links{
+        position:absolute;
+        left:5%;
+        right:5%;
+        top:78px;
+        background:var(--white);
+        border-radius:20px;
+        padding:12px;
+        box-shadow:var(--shadow);
+        flex-direction:column;
+        align-items:stretch;
+        display:none;
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .nav-links a{
+        text-align:center;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    .hero h1{
+        font-size:58px;
+    }
+
+    .animal-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .fact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .quiz-options{
+        grid-template-columns:1fr;
+    }
+
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
+        grid-auto-rows:150px;
+    }
+
+    .gallery-item:nth-child(n){
+        grid-column:span 1;
+        grid-row:span 1;
+    }
+
+    .gallery-item:nth-child(1){
+        grid-column:span 2;
+        grid-row:span 2;
+    }
+
+    .footer-container{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:520px){
+    .navbar{
+        padding:12px 4%;
+    }
+
+    .logo{
+        font-size:23px;
+    }
+
+    .logo-icon{
+        width:40px;
+        height:40px;
+    }
+
+    .nav-actions .icon-btn{
+        width:40px;
+        height:40px;
+    }
+
+    .hero{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .hero h1{
+        font-size:48px;
+        letter-spacing:-2px;
+    }
+
+    .hero-text{
+        font-size:14px;
+    }
+
+    .hero-stats{
+        gap:18px;
+    }
+
+    .hero-animal{
+        height:350px;
+    }
+
+    .hero-circle{
+        width:290px;
+        height:290px;
+    }
+
+    .floating-card{
+        font-size:11px;
+        padding:10px 12px;
+    }
+
+    .section{
+        padding:65px 5%;
+    }
+
+    .section-heading h2{
+        font-size:39px;
+    }
+
+    .animal-grid{
+        grid-template-columns:1fr;
+    }
+
+    .animal-image-wrap{
+        height:250px;
+    }
+
+    .feature-banner{
+        margin:10px 5% 60px;
+        padding:35px 25px;
+    }
+
+    .feature-banner h2{
+        font-size:36px;
+    }
+
+    .cta h2{
+        font-size:40px;
+    }
+
+    .modal-image{
+        height:240px;
+    }
+}
+
+/* =========================================================
+   EXTRA ANIMATIONS
+========================================================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:.8s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.heart-pop{
+    animation:heartPop .45s ease;
+}
+
+@keyframes heartPop{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.5)}
+    100%{transform:scale(1)}
+}
+
+.bounce{
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+/* =========================================================
+   PAW CURSOR TRAIL
+========================================================= */
+
+.cursor-paw{
+    position:fixed;
+    pointer-events:none;
+    font-size:15px;
+    z-index:9999;
+    animation:cursorFade .8s forwards;
+}
+
+@keyframes cursorFade{
+    0%{
+        opacity:1;
+        transform:scale(1) rotate(0);
+    }
+    100%{
+        opacity:0;
+        transform:scale(.4) translateY(-20px) rotate(30deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="background-shape shape-one"></div>
+<div class="background-shape shape-two"></div>
+<div class="background-shape shape-three"></div>
+
+<div class="paw p1">🐾</div>
+<div class="paw p2">🐾</div>
+<div class="paw p3">🐾</div>
+<div class="paw p4">🐾</div>
+<div class="paw p5">🐾</div>
+
+<!-- =======================================================
+     NAVBAR
+======================================================= -->
+
+<nav class="navbar">
+    <div class="nav-container">
+
+        <a href="#" class="logo">
+            <span class="logo-icon">🐾</span>
+            Animalia
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#animals">Animals</a>
+            <a href="#facts">Facts</a>
+            <a href="#quiz">Quiz</a>
+            <a href="#gallery">Gallery</a>
+        </div>
+
+        <div class="nav-actions">
+            <button class="icon-btn" id="themeBtn" title="Dark Mode">🌙</button>
+            <button class="icon-btn menu-btn" id="menuBtn">☰</button>
+        </div>
+
+    </div>
+</nav>
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<header class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="mini-label">✨ WELCOME TO ANIMALIA</span>
+
+        <h1>
+            Dunia<br>
+            <span>Hewan</span>
+            <span class="blue">Lucu!</span> 🐾
+        </h1>
+
+        <p class="hero-text">
+            Tempat kecil yang penuh dengan hewan-hewan menggemaskan,
+            fakta unik, foto lucu, permainan seru, dan berbagai kejutan
+            yang bisa kamu temukan sambil menjelajahi dunia Animalia.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#animals" class="primary-btn">
+                🐾 Jelajahi Hewan
+            </a>
+
+            <button class="secondary-btn" id="randomHeroBtn">
+                🎲 Hewan Acak
+            </button>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <strong>20+</strong>
+                <span>Hewan</span>
+            </div>
+
+            <div class="stat">
+                <strong>50+</strong>
+                <span>Fakta</span>
+            </div>
+
+            <div class="stat">
+                <strong>∞</strong>
+                <span>Kelucuan</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="hero-animal">
+
+        <div class="hero-circle">
+
+            <img
+                class="hero-img"
+                src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=900&q=85"
+                alt="Lion"
+            >
+
+        </div>
+
+        <div class="floating-card card-a">
+            🦁 King of Animals
+        </div>
+
+        <div class="floating-card card-b">
+            💖 So Cute!
+        </div>
+
+    </div>
+
+</header>
+
+<!-- =======================================================
+     ANIMALS
+======================================================= -->
+
+<section class="section reveal" id="animals">
+
+    <div class="section-heading">
+
+        <span class="section-tag">EXPLORE</span>
+
+        <h2>Teman-Teman Lucu 🐶</h2>
+
+        <p>
+            Pilih hewan favoritmu dan temukan berbagai fakta menarik
+            tentang mereka.
+        </p>
+
+    </div>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Cari hewan kesukaanmu..."
+        >
+
+        <span class="search-icon">✨</span>
+
+    </div>
+
+    <div class="filters">
+
+        <button class="filter-btn active" data-filter="all">
+            🌎 Semua
+        </button>
+
+        <button class="filter-btn" data-filter="mammal">
+            🐾 Mamalia
+        </button>
+
+        <button class="filter-btn" data-filter="bird">
+            🐦 Burung
+        </button>
+
+        <button class="filter-btn" data-filter="marine">
+            🌊 Laut
+        </button>
+
+        <button class="filter-btn" data-filter="wild">
+            🌿 Liar
+        </button>
+
+    </div>
+
+    <div class="animal-grid" id="animalGrid">
+
+        <!-- DOG -->
+        <article
+            class="animal-card"
+            data-name="anjing dog"
+            data-category="mammal"
+            data-animal="dog"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=85"
+                    alt="Anjing"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Doggy 🐶</h3>
+
+                <p>
+                    Sahabat manusia yang terkenal setia,
+                    pintar, dan sangat menyenangkan.
+                </p>
+
+                <div class="animal-meta">
+
+                    <span class="animal-type">MAMALIA</span>
+
+                    <button class="detail-btn">
+                        Lihat →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- CAT -->
+        <article
+            class="animal-card"
+            data-name="kucing cat"
+            data-category="mammal"
+            data-animal="cat"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=700&q=85"
+                    alt="Kucing"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Kitty 🐱</h3>
+
+                <p>
+                    Hewan mungil yang terkenal dengan
+                    sifat manja dan tingkah lucunya.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">MAMALIA</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- RABBIT -->
+        <article
+            class="animal-card"
+            data-name="kelinci rabbit"
+            data-category="mammal"
+            data-animal="rabbit"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=700&q=85"
+                    alt="Kelinci"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Bunny 🐰</h3>
+
+                <p>
+                    Kelinci memiliki telinga panjang
+                    dan terkenal dengan lompatan lucunya.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">MAMALIA</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- FOX -->
+        <article
+            class="animal-card"
+            data-name="rubah fox"
+            data-category="wild"
+            data-animal="fox"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=700&q=85"
+                    alt="Rubah"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Foxy 🦊</h3>
+
+                <p>
+                    Rubah terkenal karena kecerdikan,
+                    telinga runcing, dan ekornya yang indah.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">LIAR</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- PANDA -->
+        <article
+            class="animal-card"
+            data-name="panda"
+            data-category="mammal"
+            data-animal="panda"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=700&q=85"
+                    alt="Panda"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Panda 🐼</h3>
+
+                <p>
+                    Panda sangat suka bambu dan
+                    menghabiskan banyak waktu untuk makan.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">MAMALIA</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- LION -->
+        <article
+            class="animal-card"
+            data-name="singa lion"
+            data-category="wild"
+            data-animal="lion"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=700&q=85"
+                    alt="Singa"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Lion 🦁</h3>
+
+                <p>
+                    Singa adalah kucing besar yang
+                    terkenal dengan surai dan aumannya.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">LIAR</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- ELEPHANT -->
+        <article
+            class="animal-card"
+            data-name="gajah elephant"
+            data-category="wild"
+            data-animal="elephant"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=700&q=85"
+                    alt="Gajah"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Elephant 🐘</h3>
+
+                <p>
+                    Gajah merupakan hewan darat besar
+                    dengan ingatan yang sangat baik.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">LIAR</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- TIGER -->
+        <article
+            class="animal-card"
+            data-name="harimau tiger"
+            data-category="wild"
+            data-animal="tiger"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=700&q=85"
+                    alt="Harimau"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Tiger 🐯</h3>
+
+                <p>
+                    Harimau adalah kucing besar dengan
+                    pola garis yang unik pada tubuhnya.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">LIAR</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- PENGUIN -->
+        <article
+            class="animal-card"
+            data-name="penguin"
+            data-category="bird"
+            data-animal="penguin"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?auto=format&fit=crop&w=700&q=85"
+                    alt="Penguin"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Penguin 🐧</h3>
+
+                <p>
+                    Penguin adalah burung yang tidak bisa
+                    terbang tetapi sangat pandai berenang.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">BURUNG</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- OWL -->
+        <article
+            class="animal-card"
+            data-name="burung hantu owl"
+            data-category="bird"
+            data-animal="owl"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1470116945706-e6bf5e6c0b16?auto=format&fit=crop&w=700&q=85"
+                    alt="Burung hantu"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Owl 🦉</h3>
+
+                <p>
+                    Burung hantu memiliki penglihatan
+                    yang sangat baik dan aktif pada malam hari.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">BURUNG</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- PARROT -->
+        <article
+            class="animal-card"
+            data-name="burung beo parrot"
+            data-category="bird"
+            data-animal="parrot"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=700&q=85"
+                    alt="Burung beo"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Parrot 🦜</h3>
+
+                <p>
+                    Burung beo terkenal dengan warna
+                    bulu cerah dan kemampuannya menirukan suara.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">BURUNG</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- DOLPHIN -->
+        <article
+            class="animal-card"
+            data-name="lumba lumba dolphin"
+            data-category="marine"
+            data-animal="dolphin"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1607153333879-c174d265f1d2?auto=format&fit=crop&w=700&q=85"
+                    alt="Lumba-lumba"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Dolphin 🐬</h3>
+
+                <p>
+                    Lumba-lumba dikenal cerdas,
+                    aktif, dan sering hidup dalam kelompok.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">LAUT</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- TURTLE -->
+        <article
+            class="animal-card"
+            data-name="kura kura turtle"
+            data-category="marine"
+            data-animal="turtle"
+        >
+
+            <div class="animal-image-wrap">
+
+                <img
+                    class="animal-image"
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=85"
+                    alt="Kura-kura"
+                >
+
+                <button class="favorite">♡</button>
+
+            </div>
+
+            <div class="animal-info">
+
+                <h3>Turtle 🐢</h3>
+
+                <p>
+                    Kura-kura memiliki cangkang yang
+                    berfungsi sebagai pelindung tubuhnya.
+                </p>
+
+                <div class="animal-meta">
+                    <span class="animal-type">LAUT</span>
+                    <button class="detail-btn">Lihat →</button>
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     FEATURE
+======================================================= -->
+
+<section class="feature-banner reveal">
+
+    <h2>🐾 Kamu punya hewan favorit?</h2>
+
+    <p>
+        Klik tombol di bawah untuk mendapatkan hewan secara acak.
+        Siapa tahu kamu menemukan hewan baru yang belum pernah kamu
+        perhatikan sebelumnya!
+    </p>
+
+    <div class="feature-buttons">
+
+        <button class="white-btn" id="randomBtn">
+            🎲 Pilih Hewan Acak
+        </button>
+
+        <a href="#quiz" class="white-btn">
+            🧠 Coba Quiz
+        </a>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     FACTS
+======================================================= -->
+
+<section class="section reveal" id="facts">
+
+    <div class="section-heading">
+
+        <span class="section-tag">DID YOU KNOW?</span>
+
+        <h2>Fakta Hewan 🧠</h2>
+
+        <p>
+            Beberapa fakta kecil yang mungkin membuatmu berkata,
+            "Serius?!"
+        </p>
+
+    </div>
+
+    <div class="fact-grid">
+
+        <div class="fact-card">
+
+            <div class="fact-icon">🐙</div>
+
+            <h3>Gurita</h3>
+
+            <p>
+                Gurita memiliki tiga jantung dan sistem tubuh
+                yang sangat unik.
+            </p>
+
+        </div>
+
+        <div class="fact-card">
+
+            <div class="fact-icon">🦒</div>
+
+            <h3>Jerapah</h3>
+
+            <p>
+                Jerapah memiliki leher yang panjang dan pola
+                tubuh yang berbeda pada setiap individu.
+            </p>
+
+        </div>
+
+        <div class="fact-card">
+
+            <div class="fact-icon">🐝</div>
+
+            <h3>Lebah</h3>
+
+            <p>
+                Lebah berkomunikasi mengenai lokasi makanan
+                menggunakan gerakan tubuh tertentu.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     QUIZ
+======================================================= -->
+
+<section class="section quiz-section reveal" id="quiz">
+
+    <div class="section-heading">
+
+        <span class="section-tag">MINI GAME</span>
+
+        <h2>Animal Quiz 🧠</h2>
+
+        <p>
+            Seberapa kenal kamu dengan dunia hewan?
+        </p>
+
+    </div>
+
+    <div class="quiz-box" id="quizBox">
+
+        <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgress"></div>
+        </div>
+
+        <div id="quizGame">
+
+            <div class="quiz-question" id="quizQuestion">
+                Hewan apakah yang dikenal sebagai "King of the Jungle"?
+            </div>
+
+            <div class="quiz-options" id="quizOptions"></div>
+
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+
+            <div class="bounce" style="font-size:60px">
+                🏆
+            </div>
+
+            <h2>Quiz Selesai!</h2>
+
+            <div class="quiz-score" id="quizScore">
+                0/5
+            </div>
+
+            <p>
+                Terima kasih sudah bermain!
+            </p>
+
+            <br>
+
+            <button class="primary-btn" id="restartQuiz">
+                🔄 Main Lagi
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     GALLERY
+======================================================= -->
+
+<section class="section reveal" id="gallery">
+
+    <div class="section-heading">
+
+        <span class="section-tag">PHOTO WALL</span>
+
+        <h2>Animal Gallery 📸</h2>
+
+        <p>
+            Kumpulan foto hewan yang menggemaskan.
+        </p>
+
+    </div>
+
+    <div class="gallery">
+
+        <div class="gallery-item">
+            <img
+                src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=900&q=85"
+                alt="Lion"
+            >
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=700&q=85"
+                alt="Cat"
+            >
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=85"
+                alt="Dog"
+            >
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=700&q=85"
+                alt="Panda"
+            >
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=700&q=85"
+                alt="Tiger"
+            >
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=700&q=85"
+                alt="Parrot"
+            >
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     CTA
+======================================================= -->
+
+<section class="cta reveal">
+
+    <div class="cta-box">
+
+        <div style="font-size:50px" class="bounce">
+            🐶 🐱 🐰
+        </div>
+
+        <h2>
+            Hewan apa favoritmu?
+        </h2>
+
+        <p>
+            Jangan lupa kasih love ❤️ kepada hewan yang paling kamu suka!
+        </p>
+
+        <button class="primary-btn" id="loveBtn">
+            ❤️ Kasih Love
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <div>
+
+            <div class="footer-logo">
+                🐾 Animalia
+            </div>
+
+            <p class="footer-text">
+                Website kecil untuk menjelajahi dunia hewan
+                dengan cara yang menyenangkan, lucu, dan interaktif.
+            </p>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h4>Menu</h4>
+
+            <a href="#home">Home</a>
+            <a href="#animals">Animals</a>
+            <a href="#facts">Facts</a>
+            <a href="#quiz">Quiz</a>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h4>Explore</h4>
+
+            <a href="#gallery">Gallery</a>
+            <a href="#animals">Favorite</a>
+            <a href="#quiz">Mini Game</a>
+            <a href="#">Back to Top</a>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 Animalia • Made with ❤️ and 🐾
+    </div>
+
+</footer>
+
+<!-- =======================================================
+     MODAL
+======================================================= -->
+
+<div class="modal" id="animalModal">
+
+    <div class="modal-content">
+
+        <button class="close-modal" id="closeModal">
+            ✕
+        </button>
+
+        <img
+            class="modal-image"
+            id="modalImage"
+            src=""
+            alt=""
+        >
+
+        <div class="modal-info">
+
+            <h2 id="modalTitle">
+                Animal
+            </h2>
+
+            <p id="modalDescription">
+                Description
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div class="toast" id="toast">
+    ❤️ Ditambahkan ke favorit!
+</div>
+
+<button class="scroll-top" id="scrollTop">
+    ↑
+</button>
+
+<!-- =======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script>
+
+/* =========================================================
+   DATA ANIMAL
+========================================================= */
+
+const animalData = {
+
+    dog:{
+        title:"Doggy 🐶",
+        image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85",
+        description:"Anjing merupakan salah satu hewan yang sangat dekat dengan manusia. Mereka dikenal sebagai hewan yang setia, aktif, pintar, dan memiliki banyak sekali karakter berbeda."
+    },
+
+    cat:{
+        title:"Kitty 🐱",
+        image:"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=900&q=85",
+        description:"Kucing adalah hewan yang terkenal dengan sifat mandiri tetapi juga bisa sangat manja. Tingkah mereka sering membuat manusia tertawa."
+    },
+
+    rabbit:{
+        title:"Bunny 🐰",
+        image:"https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85",
+        description:"Kelinci memiliki telinga panjang, tubuh kecil, dan kaki belakang yang kuat untuk melompat."
+    },
+
+    fox:{
+        title:"Foxy 🦊",
+        image:"https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=900&q=85",
+        description:"Rubah dikenal sebagai hewan yang cerdas dan sangat adaptif. Ekornya yang besar juga membantu menjaga keseimbangan dan suhu tubuh."
+    },
+
+    panda:{
+        title:"Panda 🐼",
+        image:"https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=900&q=85",
+        description:"Panda terkenal dengan warna hitam putihnya. Makanan favoritnya adalah bambu."
+    },
+
+    lion:{
+        title:"Lion 🦁",
+        image:"https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=900&q=85",
+        description:"Singa adalah salah satu kucing besar paling terkenal. Singa jantan memiliki surai yang menjadi ciri khasnya."
+    },
+
+    elephant:{
+        title:"Elephant 🐘",
+        image:"https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=900&q=85",
+        description:"Gajah merupakan mamalia darat berukuran besar. Belalainya digunakan untuk mengambil makanan, minum, dan berbagai aktivitas lainnya."
+    },
+
+    tiger:{
+        title:"Tiger 🐯",
+        image:"https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=900&q=85",
+        description:"Harimau memiliki pola garis yang unik. Tidak ada dua harimau yang memiliki pola garis yang benar-benar sama."
+    },
+
+    penguin:{
+        title:"Penguin 🐧",
+        image:"https://images.unsplash.com/photo-1470116945706-e6bf5e6c0b16?auto=format&fit=crop&w=900&q=85",
+        description:"Penguin adalah burung yang tidak dapat terbang tetapi memiliki kemampuan berenang yang sangat baik."
+    },
+
+    owl:{
+        title:"Owl 🦉",
+        image:"https://images.unsplash.com/photo-1543549790-8b5f4a0281f7?auto=format&fit=crop&w=900&q=85",
+        description:"Burung hantu memiliki penglihatan dan pendengaran yang sangat baik. Banyak spesies aktif pada malam hari."
+    },
+
+    parrot:{
+        title:"Parrot 🦜",
+        image:"https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=900&q=85",
+        description:"Burung beo dikenal karena warna bulunya yang cerah dan beberapa spesies mampu meniru berbagai suara."
+    },
+
+    dolphin:{
+        title:"Dolphin 🐬",
+        image:"https://images.unsplash.com/photo-1607153333879-c174d265f1d2?auto=format&fit=crop&w=900&q=85",
+        description:"Lumba-lumba merupakan mamalia laut yang terkenal cerdas dan sering hidup dalam kelompok."
+    },
+
+    turtle:{
+        title:"Turtle 🐢",
+        image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85",
+        description:"Kura-kura memiliki cangkang yang berfungsi sebagai pelindung. Mereka juga terkenal dengan gerakannya yang relatif lambat."
+    }
+
+};
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click",()=>{
+
+    navLinks.classList.toggle("show");
+
+});
+
+document.querySelectorAll(".nav-links a").forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        navLinks.classList.remove("show");
+
+    });
+
+});
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click",()=>{
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+
+        themeBtn.textContent="☀️";
+
+        localStorage.setItem("animaliaTheme","dark");
+
+    }else{
+
+        themeBtn.textContent="🌙";
+
+        localStorage.setItem("animaliaTheme","light");
+
+    }
+
+});
+
+if(localStorage.getItem("animaliaTheme")==="dark"){
+
+    document.body.classList.add("dark");
+
+    themeBtn.textContent="☀️";
+
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchInput = document.getElementById("searchInput");
+const animalCards = document.querySelectorAll(".animal-card");
+
+searchInput.addEventListener("input",()=>{
+
+    const value = searchInput.value.toLowerCase().trim();
+
+    animalCards.forEach(card=>{
+
+        const name = card.dataset.name;
+
+        if(name.includes(value)){
+
+            card.style.display="block";
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+});
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+filterButtons.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        filterButtons.forEach(btn=>{
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+
+        animalCards.forEach(card=>{
+
+            if(
+                filter==="all" ||
+                card.dataset.category===filter
+            ){
+
+                card.style.display="block";
+
+            }else{
+
+                card.style.display="none";
+
+            }
+
+        });
+
+        searchInput.value="";
+
+    });
+
+});
+
+/* =========================================================
+   FAVORITE
+========================================================= */
+
+const toast = document.getElementById("toast");
+
+document.querySelectorAll(".favorite").forEach(button=>{
+
+    button.addEventListener("click",(event)=>{
+
+        event.stopPropagation();
+
+        button.classList.toggle("liked");
+
+        if(button.classList.contains("liked")){
+
+            button.textContent="♥";
+
+            showToast("❤️ Ditambahkan ke favorit!");
+
+        }else{
+
+            button.textContent="♡";
+
+            showToast("💔 Dihapus dari favorit");
+
+        }
+
+        button.classList.add("heart-pop");
+
+        setTimeout(()=>{
+
+            button.classList.remove("heart-pop");
+
+        },500);
+
+    });
+
+});
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer=setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2200);
+
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+const modal = document.getElementById("animalModal");
+const modalImage = document.getElementById("modalImage");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
+const closeModal = document.getElementById("closeModal");
+
+document.querySelectorAll(".detail-btn").forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        const card = button.closest(".animal-card");
+
+        const animal = card.dataset.animal;
+
+        const data = animalData[animal];
+
+        if(!data)return;
+
+        modalImage.src=data.image;
+        modalImage.alt=data.title;
+        modalTitle.textContent=data.title;
+        modalDescription.textContent=data.description;
+
+        modal.classList.add("show");
+
+        document.body.style.overflow="hidden";
+
+    });
+
+});
+
+closeModal.addEventListener("click",closeAnimalModal);
+
+modal.addEventListener("click",(event)=>{
+
+    if(event.target===modal){
+
+        closeAnimalModal();
+
+    }
+
+});
+
+function closeAnimalModal(){
+
+    modal.classList.remove("show");
+
+    document.body.style.overflow="";
+
+}
+
+/* =========================================================
+   RANDOM ANIMAL
+========================================================= */
+
+const animalKeys = Object.keys(animalData);
+
+function randomAnimal(){
+
+    const randomKey =
+        animalKeys[
+            Math.floor(
+                Math.random()*animalKeys.length
+            )
+        ];
+
+    const data=animalData[randomKey];
+
+    modalImage.src=data.image;
+    modalImage.alt=data.title;
+    modalTitle.textContent=data.title;
+    modalDescription.textContent=data.description;
+
+    modal.classList.add("show");
+
+    document.body.style.overflow="hidden";
+
+    showToast("🎲 Hewan acak berhasil dipilih!");
+
+}
+
+document.getElementById("randomBtn")
+.addEventListener("click",randomAnimal);
+
+document.getElementById("randomHeroBtn")
+.addEventListener("click",randomAnimal);
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+const revealObserver =
+    new IntersectionObserver(
+        entries=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("visible");
+
+                }
+
+            });
+
+        },
+        {
+            threshold:.12
+        }
+    );
+
+revealElements.forEach(element=>{
+
+    revealObserver.observe(element);
+
+});
+
+/* =========================================================
+   SCROLL TOP
+========================================================= */
+
+const scrollTop=document.getElementById("scrollTop");
+
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY>500){
+
+        scrollTop.classList.add("show");
+
+    }else{
+
+        scrollTop.classList.remove("show");
+
+    }
+
+});
+
+scrollTop.addEventListener("click",()=>{
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+});
+
+/* =========================================================
+   QUIZ DATA
+========================================================= */
+
+const quizQuestions=[
+
+    {
+        question:
+        "Hewan apakah yang dikenal sebagai King of the Jungle?",
+
+        options:[
+            "Harimau 🐯",
+            "Singa 🦁",
+            "Gajah 🐘",
+            "Serigala 🐺"
+        ],
+
+        answer:1
+    },
+
+    {
+        question:
+        "Hewan manakah yang terkenal memiliki belalai?",
+
+        options:[
+            "Gajah 🐘",
+            "Panda 🐼",
+            "Kelinci 🐰",
+            "Rubah 🦊"
+        ],
+
+        answer:0
+    },
+
+    {
+        question:
+        "Hewan manakah yang merupakan burung tetapi tidak dapat terbang?",
+
+        options:[
+            "Elang 🦅",
+            "Penguin 🐧",
+            "Beo 🦜",
+            "Merpati 🕊️"
+        ],
+
+        answer:1
+    },
+
+    {
+        question:
+        "Hewan laut manakah yang terkenal sangat cerdas?",
+
+        options:[
+            "Dolphin 🐬",
+            "Kucing 🐱",
+            "Kelinci 🐰",
+            "Rubah 🦊"
+        ],
+
+        answer:0
+    },
+
+    {
+        question:
+        "Makanan yang sangat identik dengan panda adalah?",
+
+        options:[
+            "Daging",
+            "Bambu 🎋",
+            "Ikan",
+            "Rumput"
+        ],
+
+        answer:1
+    }
+
+];
+
+let currentQuestion=0;
+let score=0;
+
+const quizQuestion=
+    document.getElementById("quizQuestion");
+
+const quizOptions=
+    document.getElementById("quizOptions");
+
+const quizProgress=
+    document.getElementById("quizProgress");
+
+const quizGame=
+    document.getElementById("quizGame");
+
+const quizResult=
+    document.getElementById("quizResult");
+
+const quizScore=
+    document.getElementById("quizScore");
+
+function loadQuestion(){
+
+    const question=
+        quizQuestions[currentQuestion];
+
+    quizQuestion.textContent=
+        question.question;
+
+    quizOptions.innerHTML="";
+
+    question.options.forEach(
+        (option,index)=>{
+
+            const button=
+                document.createElement("button");
+
+            button.className="quiz-option";
+
+            button.textContent=option;
+
+            button.addEventListener(
+                "click",
+                ()=>{
+                    answerQuestion(index);
+                }
+            );
+
+            quizOptions.appendChild(button);
+
+        }
+    );
+
+    const progress=
+        (currentQuestion /
+        quizQuestions.length)*100;
+
+    quizProgress.style.width=
+        progress+"%";
+
+}
+
+function answerQuestion(index){
+
+    const question=
+        quizQuestions[currentQuestion];
+
+    const buttons=
+        document.querySelectorAll(".quiz-option");
+
+    buttons.forEach(button=>{
+        button.disabled=true;
+    });
+
+    if(index===question.answer){
+
+        score++;
+
+        buttons[index].style.background=
+            "#bdf3c8";
+
+        showToast("🎉 Jawaban benar!");
+
+    }else{
+
+        buttons[index].style.background=
+            "#ffd0d0";
+
+        buttons[question.answer].style.background=
+            "#bdf3c8";
+
+        showToast("😅 Hampir benar!");
+
+    }
+
+    setTimeout(()=>{
+
+        currentQuestion++;
+
+        if(
+            currentQuestion<
+            quizQuestions.length
+        ){
+
+            loadQuestion();
+
+        }else{
+
+            finishQuiz();
+
+        }
+
+    },900);
+
+}
+
+function finishQuiz(){
+
+    quizGame.style.display="none";
+
+    quizResult.style.display="block";
+
+    quizProgress.style.width="100%";
+
+    quizScore.textContent=
+        score+"/"+quizQuestions.length;
+
+}
+
+document.getElementById("restartQuiz")
+.addEventListener("click",()=>{
+
+    currentQuestion=0;
+    score=0;
+
+    quizGame.style.display="block";
+
+    quizResult.style.display="none";
+
+    loadQuestion();
+
+});
+
+loadQuestion();
+
+/* =========================================================
+   LOVE BUTTON
+========================================================= */
+
+document.getElementById("loveBtn")
+.addEventListener("click",()=>{
+
+    const button=
+        document.getElementById("loveBtn");
+
+    button.textContent="❤️ LOVE TERKIRIM!";
+
+    showToast(
+        "🐾 Semua hewan mengucapkan terima kasih!"
+    );
+
+    setTimeout(()=>{
+
+        button.textContent="❤️ Kasih Love";
+
+    },2500);
+
+});
+
+/* =========================================================
+   CURSOR PAW
+========================================================= */
+
+let lastPaw=0;
+
+document.addEventListener("mousemove",(event)=>{
+
+    const now=Date.now();
+
+    if(now-lastPaw<120)return;
+
+    lastPaw=now;
+
+    const paw=
+        document.createElement("span");
+
+    paw.className="cursor-paw";
+
+    paw.textContent="🐾";
+
+    paw.style.left=
+        event.clientX+"px";
+
+    paw.style.top=
+        event.clientY+"px";
+
+    document.body.appendChild(paw);
+
+    setTimeout(()=>{
+
+        paw.remove();
+
+    },800);
+
+});
+
+/* =========================================================
+   KEYBOARD ESC
+========================================================= */
+
+document.addEventListener("keydown",(event)=>{
+
+    if(event.key==="Escape"){
+
+        closeAnimalModal();
+
+    }
+
+});
+
+/* =========================================================
+   IMAGE ERROR FALLBACK
+========================================================= */
+
+document.querySelectorAll("img")
+.forEach(image=>{
+
+    image.addEventListener("error",()=>{
+
+        image.src=
+        "https://placehold.co/900x600/ffdff0/ffffff?text=Animal+🐾";
+
+    });
+
+});
+
+/* =========================================================
+   CONSOLE
+========================================================= */
+
+console.log(
+`
+🐾 ANIMALIA
+Welcome to the cute animal world!
+
+Features:
+✓ Search
+✓ Filter
+✓ Favorite
+✓ Dark Mode
+✓ Random Animal
+✓ Animal Modal
+✓ Quiz
+✓ Gallery
+✓ Scroll Animation
+✓ Cursor Paw
+✓ Responsive Design
+
+Made with HTML + CSS + JavaScript ❤️
+`
+);
+
+</script>
+
+</body>
+</html>
